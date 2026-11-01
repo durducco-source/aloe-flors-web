@@ -43,6 +43,8 @@
 
 /* ---------- 2. BASE ---------- */
 *, *::before, *::after { box-sizing: border-box; }
+/* Los elementos ocultos (menú móvil, visores) no deben tapar ni bloquear la página */
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;

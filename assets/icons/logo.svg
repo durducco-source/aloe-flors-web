@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Aloe Flors">
+  <path d="M100 8c10 0 17 4 25 12l55 55c8 8 12 15 12 25s-4 17-12 25l-55 55c-8 8-15 12-25 12s-17-4-25-12l-55-55C12 117 8 110 8 100s4-17 12-25l55-55c8-8 15-12 25-12z" fill="#8DAA76"/>
+  <g fill="#F6F2E9" stroke="#F6F2E9">
+    <text x="0" y="0" transform="translate(46 140) rotate(-42)" font-family="Manrope, Montserrat, Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="3" stroke="none">ALOE</text>
+    <path d="M121 86c-1 22 1 46 0 74" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M121 122c-8-1-14-6-16-13 8 0 14 5 16 13zM121 136c7-2 12-7 13-14-7 1-12 6-13 14z" stroke="none"/>
+    <text x="127" y="160" font-family="Manrope, Montserrat, Arial, sans-serif" font-weight="600" font-size="15" letter-spacing="2.5" stroke="none">FLORS</text>
+  </g>
+</svg>

@@ -155,7 +155,7 @@ svg { width: 1em; height: 1em; flex: none; }
   transition: opacity .8s var(--ease) .1s, visibility 0s linear 1s;
 }
 .intro-mark { width: clamp(110px, 16vw, 170px); height: auto; aspect-ratio: 1; animation: introMark 1.3s var(--ease) both; }
-.is-loaded .intro { opacity: 0; visibility: hidden; }
+.is-loaded .intro { opacity: 0; visibility: hidden; pointer-events: none; }
 @keyframes introMark { from { opacity: 0; transform: scale(.82) rotate(-8deg); } to { opacity: 1; transform: none; } }
 
 .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 120; pointer-events: none; }

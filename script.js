@@ -33,7 +33,12 @@ const waLink = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURICompo
 $$('[data-wa]').forEach((a) => { a.href = waLink(a.dataset.wa); });
 
 /* ---------- Intro y carga ---------- */
-const finishIntro = () => document.body.classList.add('is-loaded');
+const finishIntro = () => {
+  if (document.body.classList.contains('is-loaded')) return;
+  document.body.classList.add('is-loaded');
+  // Quita la capa de intro del todo aunque el navegador no complete la animación
+  setTimeout(() => $('.intro')?.remove(), 1200);
+};
 let introShown = false;
 try { introShown = sessionStorage.getItem('aloe-intro') === '1'; sessionStorage.setItem('aloe-intro', '1'); } catch (e) { /* sin almacenamiento */ }
 if (reduceMotion || introShown) {
@@ -59,7 +64,7 @@ const onScroll = () => {
   lastY = y;
   ticking = false;
 };
-window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ---------- Menú móvil ---------- */
@@ -194,12 +199,17 @@ autoVideos.forEach((v) => autoObs.observe(v));
 const slider = $('[data-slider]');
 if (slider) {
   const step = () => (slider.querySelector('.card')?.getBoundingClientRect().width || 300) + 24;
-  $$('[data-slide]').forEach((b) => b.addEventListener('click', () => {
-    slider.scrollBy({ left: step() * Number(b.dataset.slide), behavior: reduceMotion ? 'auto' : 'smooth' });
-  }));
+  // Desplazamiento suave con respaldo: si el navegador no anima, salta directamente
+  const move = (dir) => {
+    const from = slider.scrollLeft;
+    const delta = step() * dir;
+    slider.scrollBy({ left: delta, behavior: reduceMotion ? 'auto' : 'smooth' });
+    setTimeout(() => { if (slider.scrollLeft === from) slider.scrollLeft = from + delta; }, 450);
+  };
+  $$('[data-slide]').forEach((b) => b.addEventListener('click', () => move(Number(b.dataset.slide))));
   slider.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); slider.scrollBy({ left: step(), behavior: 'smooth' }); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); slider.scrollBy({ left: -step(), behavior: 'smooth' }); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
   });
   // Arrastrar con el ratón (en táctil se usa el desplazamiento nativo)
   let down = false; let startX = 0; let startLeft = 0; let moved = false;

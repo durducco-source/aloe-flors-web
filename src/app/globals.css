@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* =================================================================
+   TEMA DE LA MARCA — recorrido cinematográfico (colores editables)
+   ================================================================= */
+:root {
+  --bg: #121b15;        /* fondo principal */
+  --bg-2: #1a261e;     /* fondo alternativo */
+  --deep: #0b120d;    /* negro de cine (escenas, menú, pie) */
+  --fg: #f6f2e9;        /* texto */
+  --accent: #e3ae3a;/* acento de la marca */
+  --line: color-mix(in srgb, var(--fg) 13%, transparent);
+  --gutter: clamp(18px, 4.5vw, 72px);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg-2);
+  --color-deep: var(--deep);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --font-display: var(--font-display-face);
+  --font-sans: var(--font-sans-face);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body {
+  background: var(--deep);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+[hidden] { display: none !important; }
+::selection { background: var(--accent); color: var(--deep); }
+:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+em { font-style: italic; color: var(--accent); }
+
+/* Tipografía de la marca en pesos finos (como en la referencia) */
+.brand-title, .chapter-word { font-family: var(--font-display); font-weight: 300; }
+.caption-title, .caption-n { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; }
+
+/* Etalonaje cálido de atardecer para todas las imágenes del recorrido */
+.grade { filter: saturate(1.06) sepia(.12) brightness(.88); }
+
+@layer components {
+  .wrap { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--gutter); }
+  .wrap > * { min-width: 0; }
+  .kicker { font-size: 10.5px; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; }
+
+  .btn { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 999px; overflow: hidden; isolation: isolate;
+    font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; transition: color .5s cubic-bezier(.22,1,.36,1); }
+  .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform: scale(.2); opacity: 0; transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .4s; }
+  .btn:hover::before { transform: none; opacity: 1; }
+  .btn svg { transition: transform .5s cubic-bezier(.22,1,.36,1); }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-solid { background: var(--fg); color: var(--deep); }
+  .btn-solid::before { background: var(--accent); }
+  .btn-line { box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 55%, transparent); backdrop-filter: blur(6px); }
+  .btn-line::before { background: var(--fg); }
+  .btn-line:hover { color: var(--deep); }
+  .btn-sm { padding: 10px 18px; font-size: 10px; }
+
+  .ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .6s cubic-bezier(.22,1,.36,1); padding-bottom: 3px; }
+  .ulink:hover { background-size: 100% 1px; }
+}
+
+/* Entrada del título de la portada */
+.fade-up { opacity: 0; transform: translateY(18px); animation: fadeUp 1.4s cubic-bezier(.22,1,.36,1) forwards; }
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+.track-in { animation: trackIn 2.4s cubic-bezier(.22,1,.36,1) .2s backwards; }
+@keyframes trackIn { from { opacity: 0; letter-spacing: .6em; padding-left: .6em; filter: blur(10px); } }
+
+.scroll-cue { animation: cue 2.2s cubic-bezier(.22,1,.36,1) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up, .track-in { animation: none; opacity: 1; transform: none; }
+  .scroll-cue { animation: none; }
+}

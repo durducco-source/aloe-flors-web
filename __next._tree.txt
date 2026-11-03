@@ -1,0 +1,6 @@
+:HL["/aloe-flors-web/_next/static/chunks/3hwa1v581d0w2.css","style"]
+:HL["/aloe-flors-web/_next/static/media/82450a180bcad83c-s.p.0p-wng2nn8o-p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/aloe-flors-web/_next/static/media/ddb686d70dc9968d-s.p.16u3vygyjnhr0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/aloe-flors-web/_next/static/media/edb99fec956915f8-s.p.32sris142tqlb.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"o6XKccWX_YHmJSKaZnnFk","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
